@@ -5,8 +5,8 @@ const authenticateToken = (req, res, next) => {
     if (authHeader){
         const [type, token] = authHeader.split(" ");
 
-        if (type === "Bearer" || token){
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if (type === "Bearer" && token){
+            jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
                 if (err){
                     return res.status(403).json({
                         error: "Forbidden",
